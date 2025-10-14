@@ -1,19 +1,13 @@
-import 'package:architecture_templates/service/http/api_method.dart';
+import 'package:architecture_templates/service/rest/api_method.dart';
 import 'package:dio/dio.dart';
 
-class HttpService {
-  const HttpService({required Dio client}) : _client = client;
+abstract class RestService {
+  const RestService({required Dio client}) : _client = client;
   final Dio _client;
 
   Map<String, dynamic> get defaultHeaders => {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
-  };
-
-  Map<String, dynamic> getAuthHeaders(String token) => {
-    'Content-Type': 'application/json',
-    'Accept': 'application/json',
-    'Authorization': 'Bearer $token',
   };
 
   Future<Response> request({

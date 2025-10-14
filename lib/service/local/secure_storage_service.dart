@@ -1,64 +1,55 @@
+import 'dart:convert';
+
+import 'package:architecture_templates/core/exception/exception_handler.dart';
+import 'package:architecture_templates/service/local/jwt_pair_model.dart';
+import 'package:architecture_templates/service/logger/logger.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class SecureStorageService {
-  SecureStorageService() {
+  final ExceptionHandler _exceptionHandler;
+
+  SecureStorageService({required AppLogger logger})
+    : _exceptionHandler = ExceptionHandler(logger: logger) {
     _secureStorage = const FlutterSecureStorage(
       aOptions: _androidOptions,
       // if needed, specify IOS options
     );
   }
+
   late final FlutterSecureStorage _secureStorage;
 
   static const AndroidOptions _androidOptions = AndroidOptions(
     encryptedSharedPreferences: true,
   );
 
-  static const _accessToken = 'accessToken';
-  static const _refreshToken = 'refreshToken';
+  static const _jwtPair = 'jwtPair';
 
-  Future<String> getAccessToken() async {
+  Future<JwtPairModel?> getJwtPair() async {
     try {
-      final data = await _secureStorage.read(key: _accessToken) ?? '';
-      return data;
-    } catch (e) {
-      return '';
+      final data = await _secureStorage.read(key: _jwtPair) ?? '';
+      return JwtPairModel.fromJson(jsonDecode(data));
+    } catch (e, stackTrace) {
+      _exceptionHandler.handleException(e, stackTrace);
+      return null;
     }
   }
 
-  Future<void> setAccessToken(String accessToken) async {
+  Future<void> setJwtPair(JwtPairModel jwtPair) async {
     try {
-      await _secureStorage.write(key: _accessToken, value: accessToken);
-    } catch (e) {
-      return;
+      await _secureStorage.write(
+        key: _jwtPair,
+        value: jsonEncode(jwtPair.toJson()),
+      );
+    } catch (e, stackTrace) {
+      _exceptionHandler.handleException(e, stackTrace);
     }
   }
 
-  Future<void> deleteAccessToken() async {
+  Future<void> deleteJwtPair() async {
     try {
-      await _secureStorage.delete(key: _accessToken);
-    } catch (e) {
-      return;
+      await _secureStorage.delete(key: _jwtPair);
+    } catch (e, stackTrace) {
+      _exceptionHandler.handleException(e, stackTrace);
     }
-  }
-
-  Future<String> getRefreshToken() async {
-    try {
-      final data = await _secureStorage.read(key: _refreshToken) ?? '';
-      return data;
-    } catch (e) {
-      return '';
-    }
-  }
-
-  Future<void> setRefreshToken(String refreshToken) async {
-    try {
-      await _secureStorage.write(key: _refreshToken, value: refreshToken);
-    } catch (e) {
-      return;
-    }
-  }
-
-  Future<void> deleteRefreshToken() {
-    return _secureStorage.delete(key: _refreshToken);
   }
 }

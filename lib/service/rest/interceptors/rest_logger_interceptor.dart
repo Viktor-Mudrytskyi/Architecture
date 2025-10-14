@@ -3,28 +3,19 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
-import '../logger/logger.dart';
+import '../../logger/logger.dart';
 
-class DioLogger extends Interceptor {
-  final Logger logger = Logger();
+class RestLoggerInterceptor extends Interceptor {
+  final AppLogger _logger;
 
-  @override
-  void onError(DioException err, ErrorInterceptorHandler handler) {
-    if (!kDebugMode) {
-      return;
-    }
-    logger.logError(
-      '${err.requestOptions.method} ${err.response?.statusCode} ${err.requestOptions.uri}\n$err',
-    );
-    super.onError(err, handler);
-  }
+  RestLoggerInterceptor({required AppLogger logger}) : _logger = logger;
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     if (!kDebugMode) {
       return;
     }
-    logger.logInfo(
+    _logger.logInfo(
       '${options.method} ${options.uri}\n-----Headers------\n${_formatIfJson(options.headers)}\n------Request-Body-----\n${_formatIfJson(options.data)}',
     );
     super.onRequest(options, handler);
@@ -38,7 +29,7 @@ class DioLogger extends Interceptor {
     if (!kDebugMode) {
       return;
     }
-    logger.logSuccess(
+    _logger.logSuccess(
       '${response.requestOptions.method} ${response.statusCode} ${response.requestOptions.uri}\n------Headers-----\n${_formatIfJson(response.headers)}\n-----Response-Body------\n${_formatIfJson(response)}',
     );
     super.onResponse(response, handler);
