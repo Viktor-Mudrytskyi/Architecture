@@ -10,3 +10,10 @@ pod install
 cd..
 
 spider build
+
+bundles
+example.architecture.dev
+example.architecture.prod
+
+Architecture dev
+Architecture prod

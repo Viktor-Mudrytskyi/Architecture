@@ -9,7 +9,7 @@ class ExceptionHandler {
     _logger.logError(exception, stackTrace);
   }
 
-  void handleAndThrowException(Object exception, [StackTrace? stackTrace]) {
+  void handleAndThrowAppException(Object exception, [StackTrace? stackTrace]) {
     handleException(exception, stackTrace);
     throw AppException(exception, stackTrace);
   }

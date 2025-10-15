@@ -139,3 +139,5 @@ lib/translate_request/
 # Custom
 gen_sealed.exe
 .fvm
+lib/env/.env.*
+!lib/env/.env.example

@@ -2,14 +2,13 @@ import 'dart:convert';
 
 import 'package:architecture_templates/core/exception/exception_handler.dart';
 import 'package:architecture_templates/service/local/jwt_pair_model.dart';
-import 'package:architecture_templates/service/logger/logger.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class SecureStorageService {
   final ExceptionHandler _exceptionHandler;
 
-  SecureStorageService({required AppLogger logger})
-    : _exceptionHandler = ExceptionHandler(logger: logger) {
+  SecureStorageService({required ExceptionHandler exceptionHandler})
+    : _exceptionHandler = exceptionHandler {
     _secureStorage = const FlutterSecureStorage(
       aOptions: _androidOptions,
       // if needed, specify IOS options
