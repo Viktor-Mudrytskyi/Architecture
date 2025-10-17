@@ -1,4 +1,6 @@
-import 'exception/exception_handler.dart';
+import 'package:dio/dio.dart';
+import 'package:get_it/get_it.dart';
+
 import '../repository/auth/auth_repository.dart';
 import '../repository/auth/auth_repository_impl.dart';
 import '../service/env/env_manager.dart';
@@ -12,8 +14,7 @@ import '../service/rest/interceptors/rest_auth_interceptor.dart';
 import '../service/rest/interceptors/rest_auth_refresh_interceptor.dart';
 import '../service/rest/interceptors/rest_logger_interceptor.dart';
 import '../service/rest/public_rest_service.dart';
-import 'package:dio/dio.dart';
-import 'package:get_it/get_it.dart';
+import 'exception/exception_handler.dart';
 
 final GetIt getIt = GetIt.instance;
 
@@ -40,7 +41,11 @@ Future<void> initDI(Flavor flavor) async {
   );
 
   getIt.registerLazySingleton<AuthRepository>(
-    () => AuthRepositoryImpl(publicRestService: getIt()),
+    () => AuthRepositoryImpl(
+      publicRestService: getIt(),
+      secureStorageService: getIt(),
+      exceptionHandler: getIt(),
+    ),
   );
 
   final Dio authorizedClient = Dio(BaseOptions(baseUrl: envConfig.baseUrl));

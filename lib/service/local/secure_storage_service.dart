@@ -1,11 +1,11 @@
 import 'dart:convert';
 
-import '../../core/exception/exception_handler.dart';
-import 'jwt_pair_model.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-class SecureStorageService {
+import '../../core/exception/exception_handler.dart';
+import 'jwt_pair_model.dart';
 
+class SecureStorageService {
   SecureStorageService({required ExceptionHandler exceptionHandler})
     : _exceptionHandler = exceptionHandler {
     _secureStorage = const FlutterSecureStorage(
@@ -26,6 +26,9 @@ class SecureStorageService {
   Future<JwtPairModel?> getJwtPair() async {
     try {
       final data = await _secureStorage.read(key: _jwtPair) ?? '';
+      if (data.isEmpty) {
+        return null;
+      }
       return JwtPairModel.fromJson(jsonDecode(data) as Map<String, dynamic>);
     } catch (e, stackTrace) {
       _exceptionHandler.handleException(e, stackTrace);
@@ -40,7 +43,7 @@ class SecureStorageService {
         value: jsonEncode(jwtPair.toJson()),
       );
     } catch (e, stackTrace) {
-      _exceptionHandler.handleException(e, stackTrace);
+      throw _exceptionHandler.handleException(e, stackTrace);
     }
   }
 
@@ -48,7 +51,7 @@ class SecureStorageService {
     try {
       await _secureStorage.delete(key: _jwtPair);
     } catch (e, stackTrace) {
-      _exceptionHandler.handleException(e, stackTrace);
+      throw _exceptionHandler.handleException(e, stackTrace);
     }
   }
 }
