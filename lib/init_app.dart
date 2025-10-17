@@ -17,7 +17,7 @@ Future<void> initApp(Flavor flavor) async {
   final packageService = getIt<PackageInfoService>();
   packageService.getPackageInfo().then((value) {
     logger.logInfo(
-      'Package Id: ${value?.packageName}, App version(${value?.version}+${value?.buildNumber})',
+      'Package Id: ${value?.packageName}, App version(${value?.version}+${value?.buildNumber}), Flavor: ${flavor.name}',
     );
   });
 
