@@ -1,21 +1,21 @@
-import 'package:architecture_templates/core/exception/exception_handler.dart';
-import 'package:architecture_templates/core/extensions.dart';
-import 'package:architecture_templates/repository/auth/auth_repository.dart';
+import '../../../core/exception/exception_handler.dart';
+import '../../../core/extensions.dart';
+import '../../../repository/auth/auth_repository.dart';
 import 'package:dio/dio.dart';
 
 class RestAuthRefreshInterceptor extends Interceptor {
-  final AuthRepository authRepository;
-  final Dio client;
-  final ExceptionHandler exceptionHandler;
 
   RestAuthRefreshInterceptor({
     required this.authRepository,
     required this.exceptionHandler,
     required this.client,
   });
+  final AuthRepository authRepository;
+  final Dio client;
+  final ExceptionHandler exceptionHandler;
 
   @override
-  void onError(DioException err, ErrorInterceptorHandler handler) async {
+  Future<void> onError(DioException err, ErrorInterceptorHandler handler) async {
     if (err.response?.statusCode == 401) {
       try {
         final newToken = await authRepository.refreshToken();

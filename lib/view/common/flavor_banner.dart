@@ -1,6 +1,6 @@
-import 'package:architecture_templates/core/di.dart';
-import 'package:architecture_templates/service/env/env_manager.dart';
-import 'package:architecture_templates/service/env/flavor.dart';
+import '../../core/di.dart';
+import '../../service/env/env_manager.dart';
+import '../../service/env/flavor.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 

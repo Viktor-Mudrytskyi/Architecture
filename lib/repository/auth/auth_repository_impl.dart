@@ -1,12 +1,12 @@
-import 'package:architecture_templates/repository/auth/auth_repository.dart';
-import 'package:architecture_templates/service/local/jwt_pair_model.dart';
-import 'package:architecture_templates/service/rest/public_rest_service.dart';
+import 'auth_repository.dart';
+import '../../service/local/jwt_pair_model.dart';
+import '../../service/rest/public_rest_service.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
-  final PublicRestService _publicRestService;
 
   const AuthRepositoryImpl({required PublicRestService publicRestService})
     : _publicRestService = publicRestService;
+  final PublicRestService _publicRestService;
 
   @override
   Future<void> deleteJwtPair() {

@@ -6,9 +6,9 @@ import 'package:flutter/foundation.dart';
 import '../../logger/logger.dart';
 
 class RestLoggerInterceptor extends Interceptor {
-  final AppLogger _logger;
 
   RestLoggerInterceptor({required AppLogger logger}) : _logger = logger;
+  final AppLogger _logger;
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {

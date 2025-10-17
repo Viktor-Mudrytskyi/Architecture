@@ -1,5 +1,5 @@
-import 'package:architecture_templates/service/env/env_config.dart';
-import 'package:architecture_templates/service/env/flavor.dart';
+import 'env_config.dart';
+import 'flavor.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 final class EnvService {

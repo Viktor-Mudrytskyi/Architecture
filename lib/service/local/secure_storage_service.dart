@@ -1,11 +1,10 @@
 import 'dart:convert';
 
-import 'package:architecture_templates/core/exception/exception_handler.dart';
-import 'package:architecture_templates/service/local/jwt_pair_model.dart';
+import '../../core/exception/exception_handler.dart';
+import 'jwt_pair_model.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class SecureStorageService {
-  final ExceptionHandler _exceptionHandler;
 
   SecureStorageService({required ExceptionHandler exceptionHandler})
     : _exceptionHandler = exceptionHandler {
@@ -14,6 +13,7 @@ class SecureStorageService {
       // if needed, specify IOS options
     );
   }
+  final ExceptionHandler _exceptionHandler;
 
   late final FlutterSecureStorage _secureStorage;
 
@@ -26,7 +26,7 @@ class SecureStorageService {
   Future<JwtPairModel?> getJwtPair() async {
     try {
       final data = await _secureStorage.read(key: _jwtPair) ?? '';
-      return JwtPairModel.fromJson(jsonDecode(data));
+      return JwtPairModel.fromJson(jsonDecode(data) as Map<String, dynamic>);
     } catch (e, stackTrace) {
       _exceptionHandler.handleException(e, stackTrace);
       return null;

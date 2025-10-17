@@ -1,15 +1,15 @@
-import 'package:architecture_templates/core/extensions.dart';
-import 'package:architecture_templates/service/local/secure_storage_service.dart';
+import '../../../core/extensions.dart';
+import '../../local/secure_storage_service.dart';
 import 'package:dio/dio.dart';
 
 class RestAuthInterceptor extends Interceptor {
-  final SecureStorageService _secureStorageService;
 
   RestAuthInterceptor({required SecureStorageService secureStorageService})
     : _secureStorageService = secureStorageService;
+  final SecureStorageService _secureStorageService;
 
   @override
-  void onRequest(
+  Future<void> onRequest(
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {

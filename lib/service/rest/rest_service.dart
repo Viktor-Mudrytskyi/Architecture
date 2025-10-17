@@ -1,5 +1,6 @@
-import 'package:architecture_templates/service/rest/api_method.dart';
 import 'package:dio/dio.dart';
+
+import 'api_method.dart';
 
 abstract class RestService {
   const RestService({required Dio client}) : _client = client;
@@ -10,7 +11,7 @@ abstract class RestService {
     'Accept': 'application/json',
   };
 
-  Future<Response> request({
+  Future<Response<dynamic>> request({
     required ApiMethods method,
     required String path,
     Map<String, dynamic>? data,

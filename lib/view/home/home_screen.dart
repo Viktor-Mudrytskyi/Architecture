@@ -7,7 +7,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: ElevatedButton(onPressed: () async {}, child: Text('Test')),
+        child: ElevatedButton(onPressed: () async {}, child: const Text('Test')),
       ),
     );
   }

@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:architecture_templates/service/logger/logger.dart';
+import 'logger.dart';
 import 'package:logger/logger.dart';
 
 class AppLoggerImpl implements AppLogger {

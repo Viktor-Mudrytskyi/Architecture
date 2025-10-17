@@ -1,8 +1,8 @@
 class AppException implements Exception {
-  final Object exception;
-  final StackTrace? stackTrace;
 
   AppException(this.exception, [this.stackTrace]);
+  final Object exception;
+  final StackTrace? stackTrace;
 
   static AppException from(Object exception, [StackTrace? stackTrace]) {
     return AppException(exception);

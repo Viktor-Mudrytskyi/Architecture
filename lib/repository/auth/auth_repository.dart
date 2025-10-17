@@ -1,4 +1,4 @@
-import 'package:architecture_templates/service/local/jwt_pair_model.dart';
+import '../../service/local/jwt_pair_model.dart';
 
 abstract interface class AuthRepository {
   Future<JwtPairModel> getJwtPair();
