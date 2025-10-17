@@ -1,9 +1,9 @@
-import 'package:architecture_templates/env/env_config.dart';
-import 'package:architecture_templates/env/flavor.dart';
+import 'package:architecture_templates/service/env/env_config.dart';
+import 'package:architecture_templates/service/env/flavor.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-final class EnvManager {
-  const EnvManager({required this.flavor});
+final class EnvService {
+  const EnvService({required this.flavor});
   final Flavor flavor;
 
   bool get isDev => flavor == Flavor.dev;

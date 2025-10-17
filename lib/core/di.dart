@@ -1,11 +1,12 @@
 import 'package:architecture_templates/core/exception/exception_handler.dart';
-import 'package:architecture_templates/env/env_manager.dart';
-import 'package:architecture_templates/env/flavor.dart';
 import 'package:architecture_templates/repository/auth/auth_repository.dart';
 import 'package:architecture_templates/repository/auth/auth_repository_impl.dart';
+import 'package:architecture_templates/service/env/env_manager.dart';
+import 'package:architecture_templates/service/env/flavor.dart';
 import 'package:architecture_templates/service/local/secure_storage_service.dart';
 import 'package:architecture_templates/service/logger/logger.dart';
 import 'package:architecture_templates/service/logger/logger_impl.dart';
+import 'package:architecture_templates/service/package_info_service.dart';
 import 'package:architecture_templates/service/rest/authorized_rest_service.dart';
 import 'package:architecture_templates/service/rest/interceptors/rest_auth_interceptor.dart';
 import 'package:architecture_templates/service/rest/interceptors/rest_auth_refresh_interceptor.dart';
@@ -17,12 +18,16 @@ import 'package:get_it/get_it.dart';
 final GetIt getIt = GetIt.instance;
 
 Future<void> initDI(Flavor flavor) async {
-  getIt.registerSingleton(EnvManager(flavor: flavor));
-  final envConfig = await getIt<EnvManager>().getEnvConfig();
-  getIt.registerLazySingleton<AppLogger>(() => AppLoggerImpl());
+  getIt.registerSingleton(EnvService(flavor: flavor));
+  final envConfig = await getIt<EnvService>().getEnvConfig();
   getIt.registerLazySingleton(
     () => ExceptionHandler(logger: getIt<AppLogger>()),
   );
+  getIt.registerLazySingleton<AppLogger>(() => AppLoggerImpl());
+  getIt.registerLazySingleton<PackageInfoService>(
+    () => PackageInfoService(exceptionHandler: getIt()),
+  );
+
   getIt.registerLazySingleton(
     () => SecureStorageService(exceptionHandler: getIt()),
   );
@@ -56,6 +61,5 @@ Future<void> initDI(Flavor flavor) async {
   getIt.registerLazySingleton<AuthorizedRestService>(
     () => AuthorizedRestService(client: authorizedClient),
   );
-
   // ---------- Data sources and repositories END ----------
 }

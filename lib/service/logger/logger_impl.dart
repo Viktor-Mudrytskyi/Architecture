@@ -13,9 +13,4 @@ class AppLoggerImpl implements AppLogger {
   void logInfo(Object? msg, [StackTrace? stackTrace]) {
     _logger.i(msg, stackTrace: stackTrace);
   }
-
-  @override
-  void logSuccess(Object? msg, [StackTrace? stackTrace]) {
-    _logger.d(msg, stackTrace: stackTrace);
-  }
 }

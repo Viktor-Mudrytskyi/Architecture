@@ -29,7 +29,7 @@ class RestLoggerInterceptor extends Interceptor {
     if (!kDebugMode) {
       return;
     }
-    _logger.logSuccess(
+    _logger.logInfo(
       '${response.requestOptions.method} ${response.statusCode} ${response.requestOptions.uri}\n------Headers-----\n${_formatIfJson(response.headers)}\n-----Response-Body------\n${_formatIfJson(response)}',
     );
     super.onResponse(response, handler);
