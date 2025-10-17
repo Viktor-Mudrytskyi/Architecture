@@ -9,4 +9,9 @@ class AppException implements Exception {
   }
 
   String get message => exception.toString();
+
+  @override
+  String toString() {
+    return message;
+  }
 }

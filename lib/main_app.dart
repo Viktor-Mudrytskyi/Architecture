@@ -1,5 +1,6 @@
 import 'package:architecture_templates/service/env/flavor.dart';
 import 'package:architecture_templates/view/common/flavor_banner.dart';
+import 'package:architecture_templates/view/home/home_screen.dart';
 import 'package:flutter/material.dart';
 
 class MainApp extends StatelessWidget {
@@ -10,7 +11,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(body: Center(child: Text('Hello World!'))),
+      home: HomeScreen(),
       builder: (context, child) {
         return FlavorBanner(flavor: flavor, child: child!);
       },

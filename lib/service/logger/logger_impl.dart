@@ -1,8 +1,12 @@
+import 'dart:io';
+
 import 'package:architecture_templates/service/logger/logger.dart';
 import 'package:logger/logger.dart';
 
 class AppLoggerImpl implements AppLogger {
-  final Logger _logger = Logger(printer: PrettyPrinter());
+  final Logger _logger = Logger(
+    printer: PrettyPrinter(colors: !Platform.isIOS), // Does not work on macOS
+  );
 
   @override
   void logError(Object? msg, [StackTrace? stackTrace]) {
