@@ -21,9 +21,7 @@
       "other": "on"
     },
     "editor.links": true,
-    "editor.rulers": [
-      80
-    ]
+    "editor.rulers": [80]
   },
   "dart.lineLength": 80,
   "dart.doNotFormat": [
@@ -38,7 +36,6 @@
     "**.pbjson.dart",
     "**/generated/**"
   ],
-  "dart.flutterSdkPath": ".fvm/versions/3.35.3",
   "search.exclude": {
     "**/.fvm": true,
     ".dart_tool": true,
@@ -72,5 +69,5 @@
         }
       ]
     }
-  },
+  }
 }

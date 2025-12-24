@@ -42,7 +42,7 @@ linter:
   rules:
     # Always
     always_declare_return_types: true
-    prefer_relative_imports: true
+    always_use_package_imports: true
     # always_require_non_null_named_parameters: true
     # Avoid
     avoid_multiple_declarations_per_line: true

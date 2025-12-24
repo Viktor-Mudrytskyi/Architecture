@@ -1,19 +1,19 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
-import '../repository/auth/auth_repository.dart';
-import '../repository/auth/auth_repository_impl.dart';
-import '../service/env/env_manager.dart';
-import '../service/env/flavor.dart';
-import '../service/local/secure_storage_service.dart';
-import '../service/logger/logger.dart';
-import '../service/logger/logger_impl.dart';
-import '../service/package_info_service.dart';
-import '../service/rest/authorized_rest_service.dart';
-import '../service/rest/interceptors/rest_auth_interceptor.dart';
-import '../service/rest/interceptors/rest_auth_refresh_interceptor.dart';
-import '../service/rest/interceptors/rest_logger_interceptor.dart';
-import '../service/rest/public_rest_service.dart';
+import '../../oldlib/repository/auth/auth_repository.dart';
+import '../../oldlib/repository/auth/auth_repository_impl.dart';
+import '../../oldlib/service/env/env_manager.dart';
+import '../../oldlib/service/env/flavor.dart';
+import '../../oldlib/service/local/secure_storage_service.dart';
+import '../../oldlib/service/logger/logger.dart';
+import '../../oldlib/service/logger/logger_impl.dart';
+import '../../oldlib/service/package_info_service.dart';
+import '../../oldlib/service/rest/authorized_rest_service.dart';
+import '../../oldlib/service/rest/interceptors/rest_auth_interceptor.dart';
+import '../../oldlib/service/rest/interceptors/rest_auth_refresh_interceptor.dart';
+import '../../oldlib/service/rest/interceptors/rest_logger_interceptor.dart';
+import '../../oldlib/service/rest/public_rest_service.dart';
 import 'exception/exception_handler.dart';
 
 final GetIt getIt = GetIt.instance;

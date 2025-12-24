@@ -4,31 +4,59 @@ publish_to: "none"
 version: 0.1.0
 
 environment:
-  sdk: ^3.9.0
+  sdk: ">=3.4.0 <4.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  dio: ^5.9.0
-  shared_preferences: ^2.5.3
-  flutter_secure_storage: ^9.2.4
-  get_it: ^8.2.0
-  logger: ^2.6.2
-  freezed: ^3.2.3
-  freezed_annotation: ^3.1.0
-  build_runner: ^2.9.0
-  json_serializable: ^6.11.1
-  json_annotation: ^4.9.0
-  flutter_dotenv: ^6.0.0
-  package_info_plus: ^9.0.0
+
+  # State Management & Dependency Injection
+  flutter_bloc: ^9.1.1
+  get_it: ^9.2.0
+  equatable: ^2.0.7
+
+  # Routing & Navigation
+  go_router: ^17.0.1
+
+  # Storage & Database
+  shared_preferences: ^2.5.4
+
+  # UI Components & Widgets
+  flutter_svg: ^2.2.3
+  fluttertoast: ^9.0.0
+  gap: ^3.0.1
+  mask_text_input_formatter: ^2.9.0
+
+  # Image & Visualization
+  image_picker: ^1.2.1
+
+  # Localization & Internationalization
+  easy_localization: ^3.0.8
+  easy_localization_loader: ^2.0.2
+  intl: ^0.20.2
+
+  # Utilities & Helpers
+  dartz: ^0.10.1
+  flutter_debouncer: ^2.1.1
+  flutter_keyboard_visibility: ^6.0.0
+  path: ^1.9.1
+  url_launcher: ^6.3.2
+
+  # Configuration & Development Tools
+  build_runner: ^2.10.4
+  fimber: ^0.7.0
+  flutter_launcher_icons: ^0.14.4
+  flutter_native_splash: ^2.4.7
+  internet_connection_checker: ^3.0.1
+  responsive_sizer: ^3.3.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^5.0.0
+  flutter_lints: ^6.0.0
 
 flutter:
   uses-material-design: true
   assets:
-    - lib/env/.env.dev
-    - lib/env/.env.prod
+    - lib/core/env/.env.dev
+    - lib/core/env/.env.prod
