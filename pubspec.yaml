@@ -49,6 +49,8 @@ dependencies:
   flutter_native_splash: ^2.4.7
   internet_connection_checker: ^3.0.1
   responsive_sizer: ^3.3.1
+  flutter_dotenv: ^6.0.0
+  package_info_plus: ^9.0.0
 
 dev_dependencies:
   flutter_test:

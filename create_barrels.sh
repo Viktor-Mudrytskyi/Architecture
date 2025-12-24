@@ -1,54 +1,47 @@
 #!/usr/bin/env bash
 
-LIB_DIR="lib"
+ROOT_DIR="lib"
 
-generate_barrel() {
-  local dir="$1"
-  local dir_name
-  dir_name=$(basename "$dir")
-  local barrel_file="${dir}/${dir_name}_src.dart"
+find "$ROOT_DIR" -type d | while read -r dir; do
+  dir_name="$(basename "$dir")"
+  barrel_file="$dir/${dir_name}_src.dart"
 
-  # Create / overwrite barrel file
-  > "$barrel_file"
+  exports=()
 
-  # Optional header
-  {
-    echo "// GENERATED CODE - DO NOT MODIFY BY HAND"
-    echo ""
-  } >> "$barrel_file"
+  # Dart files in current directory (non-recursive)
+  while IFS= read -r file; do
+    file_name="$(basename "$file")"
+    exports+=("export '$file_name';")
+  done < <(
+    find "$dir" -maxdepth 1 -type f -name "*.dart" \
+      ! -name "${dir_name}_src.dart"
+  )
 
-  # Export dart files in this directory
-  for file in "$dir"/*.dart; do
-    [ -f "$file" ] || continue
-    local filename
-    filename=$(basename "$file")
+  # Barrel files from immediate subdirectories
+  while IFS= read -r subdir; do
+    sub_name="$(basename "$subdir")"
+    sub_barrel="$subdir/${sub_name}_src.dart"
 
-    # Skip barrel files and other generated files
-    if [[ "$filename" == *_src.dart || "$filename" == *.g.dart ]]; then
-      continue
+    if [[ -f "$sub_barrel" ]]; then
+      exports+=("export '${sub_name}/${sub_name}_src.dart';")
     fi
+  done < <(
+    find "$dir" -maxdepth 1 -type d ! -path "$dir"
+  )
 
-    echo "export '$filename';" >> "$barrel_file"
-  done
+  # Skip if nothing to export
+  if [[ ${#exports[@]} -eq 0 ]]; then
+    continue
+  fi
 
-  # Recurse into subdirectories
-  for subdir in "$dir"/*/; do
-    [ -d "$subdir" ] || continue
+  echo "Generating $barrel_file"
 
-    generate_barrel "$subdir"
+  {
+    echo "// GENERATED FILE - DO NOT MODIFY BY HAND"
+    echo
+    for line in "${exports[@]}"; do
+      echo "$line"
+    done
+  } > "$barrel_file"
 
-    local subdir_name
-    subdir_name=$(basename "$subdir")
-    local sub_barrel="${subdir_name}_src.dart"
-
-    echo "export '$subdir_name/$sub_barrel';" >> "$barrel_file"
-  done
-
-  echo "Created barrel: $barrel_file"
-}
-
-# Start recursion from lib subdirectories
-for dir in "$LIB_DIR"/*/; do
-  [ -d "$dir" ] || continue
-  generate_barrel "$dir"
 done

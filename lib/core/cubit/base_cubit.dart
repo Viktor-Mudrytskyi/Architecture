@@ -1,5 +1,4 @@
-import 'package:cmms_ship_flutter_app/core/error/failures.dart';
-import 'package:cmms_ship_flutter_app/core/logger/logger.dart';
+import 'package:architecture_templates/core/core_src.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

@@ -1,8 +1,5 @@
-import 'package:cmms_ship_flutter_app/core/logger/log_formats.dart';
+import 'package:architecture_templates/core/logger/logger_src.dart';
 import 'package:fimber/fimber.dart';
-
-export 'package:cmms_ship_flutter_app/core/logger/log_format_builder.dart';
-export 'package:cmms_ship_flutter_app/core/logger/log_formats.dart';
 
 /// Log level enumeration for controlling output verbosity.
 enum LogLevel {
@@ -151,7 +148,7 @@ class FimberLogger implements Logger {
 
   @override
   T? block<T>(T Function(FimberLog log) block) {
-    return Fimber.block(block);
+    return Fimber.block(block) as T?;
   }
 
   @override

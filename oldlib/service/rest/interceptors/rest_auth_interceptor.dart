@@ -1,6 +1,7 @@
-import 'package:architecture_templates/core/extensions.dart';
-import '../../local/secure_storage_service.dart';
 import 'package:dio/dio.dart';
+
+import '../../../extensions.dart';
+import '../../local/secure_storage_service.dart';
 
 class RestAuthInterceptor extends Interceptor {
   RestAuthInterceptor({required SecureStorageService secureStorageService})

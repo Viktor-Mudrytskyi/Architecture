@@ -1,3 +1,3 @@
-// GENERATED CODE - DO NOT MODIFY BY HAND
+// GENERATED FILE - DO NOT MODIFY BY HAND
 
-export '*/*_src.dart';
+export 'models/models_src.dart';

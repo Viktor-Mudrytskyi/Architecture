@@ -1,7 +1,7 @@
 import 'package:architecture_templates/core/exception/exception_handler.dart';
 import 'package:dio/dio.dart';
 
-import 'package:architecture_templates/core/extensions.dart';
+import '../../../extensions.dart';
 import '../../../repository/auth/auth_repository.dart';
 import '../../../repository/auth/model/refresh_token_request.dart';
 

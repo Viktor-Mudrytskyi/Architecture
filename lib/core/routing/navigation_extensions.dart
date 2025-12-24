@@ -1,7 +1,4 @@
-import 'package:cmms_ship_flutter_app/core/domain/entities/node.dart';
-import 'package:cmms_ship_flutter_app/core/routing/routes.dart';
-import 'package:cmms_ship_flutter_app/features/node_info/domain/entities/media_data.dart';
-import 'package:cmms_ship_flutter_app/features/node_info/presentation/interactors/media_data_interactor.dart';
+import 'package:architecture_templates/core/core_src.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -47,36 +44,6 @@ extension NavigationExtensions on BuildContext {
       path,
       extra: {
         RouteExtras.projectName: projectName,
-      },
-    );
-  }
-
-  /// Push node info screen onto the navigation stack.
-  void pushNodeInfo({required Node node}) {
-    final path =
-        Routes.nodeInfo.replaceFirst(':${RouteParams.nodeId}', node.id.value);
-    push(
-      path,
-      extra: {
-        RouteExtras.node: node,
-      },
-    );
-  }
-
-  /// Push media data details screen onto the navigation stack.
-  void pushMediaDataDetails({
-    required String nodeId,
-    required MediaData mediaData,
-    required MediaDataInteractor mediaDataInteractor,
-  }) {
-    final path = Routes.mediaDataDetails
-        .replaceFirst(':${RouteParams.nodeId}', nodeId)
-        .replaceFirst(':${RouteParams.mediaDataId}', mediaData.id);
-    push(
-      path,
-      extra: {
-        RouteExtras.mediaData: mediaData,
-        RouteExtras.mediaDataInteractor: mediaDataInteractor,
       },
     );
   }

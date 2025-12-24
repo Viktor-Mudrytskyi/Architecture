@@ -1,9 +1,5 @@
 class ServerError {
-  final String? detail;
-  final String? message;
-  final int? statusCode;
-
-  ServerError({
+  const ServerError({
     this.detail,
     this.message,
     this.statusCode,
@@ -16,6 +12,9 @@ class ServerError {
       statusCode: json['status_code'] as int?,
     );
   }
+  final String? detail;
+  final String? message;
+  final int? statusCode;
 
   Map<String, dynamic> toJson() {
     return {

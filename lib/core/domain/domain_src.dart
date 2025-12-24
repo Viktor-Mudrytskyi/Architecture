@@ -1,5 +1,5 @@
-// GENERATED CODE - DO NOT MODIFY BY HAND
+// GENERATED FILE - DO NOT MODIFY BY HAND
 
-export '*/*_src.dart';
-export '*/*_src.dart';
-export '*/*_src.dart';
+export 'value_objects/value_objects_src.dart';
+export 'services/services_src.dart';
+export 'entities/entities_src.dart';

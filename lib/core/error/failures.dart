@@ -1,4 +1,4 @@
-import 'package:cmms_ship_flutter_app/core/error/error_model.dart';
+import 'package:architecture_templates/core/core_src.dart';
 import 'package:equatable/equatable.dart';
 
 /// Base class for all domain-level errors (Failures).
@@ -32,6 +32,12 @@ import 'package:equatable/equatable.dart';
 /// );
 /// ```
 class Failure extends Equatable {
+  const Failure({
+    this.errorMessage = 'Unexpected error occurred',
+    this.errorCode,
+    this.errorData,
+  });
+
   /// Human-readable error message (can be shown to user)
   final String errorMessage;
 
@@ -41,14 +47,12 @@ class Failure extends Equatable {
   /// HTTP status code or custom error code
   final int? errorCode;
 
-  const Failure({
-    this.errorMessage = 'Unexpected error occurred',
-    this.errorCode,
-    this.errorData,
-  });
-
   @override
-  List<Object> get props => [];
+  List<Object> get props => [
+        errorMessage,
+        errorCode ?? 0,
+        ...(errorData ?? []),
+      ];
 
   @override
   String toString() {
@@ -84,4 +88,9 @@ class ImageValidationFailure extends Failure {
 /// Failure when image picker operation fails.
 class ImagePickerFailure extends Failure {
   const ImagePickerFailure({super.errorMessage = 'Failed to pick image'});
+}
+
+/// Failure when package info retrieval fails.
+class PackageInfoFailure extends Failure {
+  const PackageInfoFailure({super.errorMessage = 'Failed to get package info'});
 }

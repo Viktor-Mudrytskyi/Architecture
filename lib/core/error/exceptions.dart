@@ -1,8 +1,4 @@
-import 'package:cmms_ship_flutter_app/core/error/failures.dart';
-import 'package:cmms_ship_flutter_app/core/error/server_error.dart';
-import 'package:cmms_ship_flutter_app/core/logger/logger.dart';
-import 'package:cmms_ship_flutter_app/core/network/network_info.dart';
-import 'package:cmms_ship_flutter_app/di.dart';
+import 'package:architecture_templates/core/core_src.dart';
 
 /// Converts an exception to an appropriate [Failure] type.
 ///
@@ -33,20 +29,14 @@ Future<Failure> errorHandler(Object error, Failure? defaultFailure) async {
       }
 
       // Parse server error message
-      ServerError serverError = ServerError.fromJson(error.responseData ?? {});
+      final ServerError serverError =
+          ServerError.fromJson(error.responseData ?? {});
       return Failure(
         errorMessage: serverError.detail != null &&
                 serverError.detail!.isNotEmpty
             ? serverError.detail!
             : 'Sorry, we cannot process your request at the moment. Please contact the support team.',
       );
-    }
-
-    // Check for network connectivity issues
-    NetworkInfo networkInfo = sl();
-    if (!(await networkInfo.isConnected)) {
-      AppLogger.w('No internet connection');
-      return InternetConnectionFailure();
     }
 
     // Use provided default failure
@@ -76,6 +66,12 @@ Future<Failure> errorHandler(Object error, Failure? defaultFailure) async {
 /// );
 /// ```
 class HttpException implements Exception {
+  HttpException({
+    this.statusCode,
+    this.responseData,
+    this.message,
+  });
+
   /// HTTP status code (e.g., 200, 404, 500)
   final int? statusCode;
 
@@ -84,12 +80,6 @@ class HttpException implements Exception {
 
   /// Human-readable error message
   final String? message;
-
-  HttpException({
-    this.statusCode,
-    this.responseData,
-    this.message,
-  });
 
   @override
   String toString() =>
