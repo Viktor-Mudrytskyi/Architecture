@@ -1,4 +1,3 @@
-import 'package:architecture_templates/core/core_src.dart';
 import 'package:equatable/equatable.dart';
 
 /// Base class for all domain-level errors (Failures).
@@ -35,14 +34,10 @@ class Failure extends Equatable {
   const Failure({
     this.errorMessage = 'Unexpected error occurred',
     this.errorCode,
-    this.errorData,
   });
 
   /// Human-readable error message (can be shown to user)
   final String errorMessage;
-
-  /// Additional error details (for debugging)
-  final List<ErrorModel>? errorData;
 
   /// HTTP status code or custom error code
   final int? errorCode;
@@ -51,12 +46,11 @@ class Failure extends Equatable {
   List<Object> get props => [
         errorMessage,
         errorCode ?? 0,
-        ...(errorData ?? []),
       ];
 
   @override
   String toString() {
-    return 'Failure(errorMessage: $errorMessage, errorData $errorData, errorCode: $errorCode)';
+    return 'Failure(errorMessage: $errorMessage, errorCode: $errorCode)';
   }
 }
 
